@@ -33,15 +33,16 @@ springgreen = (0,255,127)
 tan = (210,180,140)
 thistle = (216,191,216)
 turquoise = (64,224,208)
+violet = (128,0,128)
 
-colors = [yellow, red, green, blue, mediumaquamarine, mediumspringgreen, mediumvioletred, mintcream, moccasin, navy, olive, orange,
+colors = [yellow, green, blue, mediumaquamarine, mediumspringgreen, mediumvioletred, mintcream, moccasin, navy, olive, orange,
          orchid, palegreen, palevioletred, pink, powderblue, royalblue, salmon, seagreen, sienna, skyblue, slategray, thistle, turquoise]
 
 dis_width = 600
 dis_height = 500
 
 dis = pygame.display.set_mode((dis_width, dis_height))
-pygame.display.set_caption('Snake game by(000014541_00014548)')
+pygame.display.set_caption('Snakegame by 00014548_00014541')
 
 clock = pygame.time.Clock()
 
@@ -80,7 +81,6 @@ def our_food(snake_block, food, colors):
             pygame.draw.rect(dis, colors[x], [food[f'foodx{x}'], food[f'foody{x}'], snake_block, snake_block])
     except Exception as ex:
         print(ex)
-
 def gameLoop():
     counter = 30
     text = score_font.render("TIMER:" + str(counter), True, red)
@@ -101,6 +101,10 @@ def gameLoop():
     snake_List = []
     Length_of_snake = 1
     food = {}
+
+    for d in range(1, 5):
+        redx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
+        redy = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
 
     for i in range(0, 25):
         foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
@@ -164,6 +168,7 @@ def gameLoop():
         x1 += x1_change
         y1 += y1_change
         dis.fill(black)
+        pygame.draw.rect(dis, red, [redx, redy, snake_block, snake_block])
         snake_Head = []
         snake_Head.append(x1)
         snake_Head.append(y1)
@@ -188,6 +193,11 @@ def gameLoop():
                 Length_of_snake += 1
         if Length_of_snake == 16:
             game_win = True
+
+        if x1 == redx and y1 == redy:
+            game_close = True
+
+
         clock.tick(snake_speed)
 
     pygame.quit()
