@@ -41,7 +41,7 @@ dis_width = 600
 dis_height = 500
 
 dis = pygame.display.set_mode((dis_width, dis_height))
-pygame.display.set_caption('Snake Game by Edureka')
+pygame.display.set_caption('Snake game by(000014541_00014548)')
 
 clock = pygame.time.Clock()
 
@@ -69,7 +69,7 @@ def message(msg, color):
     mesg = font_style.render(msg, True, color)
     dis.blit(mesg, [dis_width / 6, dis_height / 3])
 
-def game_win(msg, color):
+def win(msg, color):
     mesg = font_style.render(msg, True, color)
     dis.blit(mesg, [dis_width / 6, dis_height / 3])
 
@@ -119,8 +119,7 @@ def gameLoop():
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
-                        game_over = True
-                        game_close = False
+                        pygame.quit()
                     if event.key == pygame.K_c:
                         gameLoop()
 
@@ -132,10 +131,10 @@ def gameLoop():
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
-                        game_over = True
-                        game_close = False
+                        pygame.quit()
                     if event.key == pygame.K_c:
                         gameLoop()
+
 
         for event in pygame.event.get():
             if event.type == timer_event:
@@ -147,16 +146,16 @@ def gameLoop():
             if event.type == pygame.QUIT:
                 game_over = True
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
                     y1_change = 0
-                elif event.key == pygame.K_d:
+                elif event.key == pygame.K_RIGHT:
                     x1_change = snake_block
                     y1_change = 0
-                elif event.key == pygame.K_w:
+                elif event.key == pygame.K_UP:
                     y1_change = -snake_block
                     x1_change = 0
-                elif event.key == pygame.K_s:
+                elif event.key == pygame.K_DOWN:
                     y1_change = snake_block
                     x1_change = 0
 
@@ -187,7 +186,7 @@ def gameLoop():
                 food[f'foodx{x}'] = -100
                 food[f'foody{x}'] = -100
                 Length_of_snake += 1
-        if Length_of_snake == 5:
+        if Length_of_snake == 16:
             game_win = True
         clock.tick(snake_speed)
 
